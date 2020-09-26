@@ -62,9 +62,16 @@ void print_history(List *list)
     temp = temp->next;
   }
 }
-/*
+
 void free_history(List *list)
 {
-
+  Item *temp = list->root;
+  while(temp != NULL){
+    free(temp->str);
+    free(temp);
+    temp = temp->next;
+  }
+  free(list);
 }
-*/
+
+
