@@ -6,24 +6,20 @@
 #define MAX 50
 int main()
 {
-  // List *hist = init_history();
   char input[MAX];
-  printf("enterinput\n");
-  fgets(input, MAX, stdin);
-  char **token = tokenize(input);
-  print_tokens(token);
-  free_tokens(token);
+  char **token;
+  List *hist = init_history();
   printf("Welcome to tokenizer\n");
   printf("here are your commands\n");
   printf("q : quits program\n");
   printf("!x : brings up history at certain index x\n");
-  /*
+  
   while(*input != 'q'){
     printf("$ ");
     fgets(input, MAX, stdin);
     if(*input != '!' && *input != 'q'){
       printf("string entered is %s\n", input);
-      char **token = tokenize(input);
+      token = tokenize(input);
       printf("tokenized string is\n");
       
       print_tokens(token);
@@ -33,9 +29,12 @@ int main()
       add_history(hist, input);
     }
     if(*input == '!'){
-      int index = (int)(input[1]);
+      int index = (int)(input[1]-'0');
       char *histStr = get_history(hist, index);
       printf("item at index %i%s\n",index, histStr);
+    }
+    if(*input == 'q'){
+      break;
     }
   
     
@@ -44,8 +43,7 @@ int main()
   print_history(hist);
   printf("Now clearing history\n");
   free_history(hist);
-  printf("Thank you for using tokenizer\n"); 
-  */
+  printf("Thank you for using tokenizer\n");
   return 0;
   
 }

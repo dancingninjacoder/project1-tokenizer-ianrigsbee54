@@ -1,6 +1,10 @@
 #include <stdio.h>
+
 #include <stdlib.h>
+
 #include "tokenizer.h"
+
+
 
 int space_char(char c)
 {
@@ -13,6 +17,7 @@ int space_char(char c)
   }
   return 0;
 }
+
 int non_space_char(char c)
 {
   if(c == '\0'){
@@ -23,43 +28,36 @@ int non_space_char(char c)
   }
   return 0;
 }
+
 char *word_start(char *str)
 {
-  while(*str != '\0'){
-    if(non_space_char(*str)){
-      return str;
-    }
+  while(space_char(*str)){
     str++;
   }
   return str;
 }
-
 char *word_terminator(char *word)
 {
-  while(*word != '\0'){
-    if(space_char(*word)){
-      return word;
-    }
+  while(non_space_char(*word)){
     word++;
   }
   return word;
 }
 
- 
 int count_words(char *str)
 {
-  char *temp = str;
-  if(*temp == '\0'){
-    return 0;
+  int count = 0;
+  while(*str != '\0'){
+    str = word_start(str);
+    str = word_terminator(str);
+    count++;
   }
-  temp = word_start(temp);
-  temp = word_terminator(temp);
-  return 1 + count_words(temp);
+  return count;
 }
 
 char *copy_str(char *inStr, short len)
 {
-  char *copied_str = (char*) malloc(len + 1);
+  char *copied_str = (char*) malloc(sizeof(char)*(len + 1));
   int i = 0;
   while(i < len){
     copied_str[i] = inStr[i];
@@ -73,40 +71,31 @@ char **tokenize(char* str)
 {
   int length = count_words(str);
   char **char_array;
-  char_array = (char**)malloc(length + 1);
+  char_array = (char**)malloc(sizeof(char*) * (length + 1));
   int i = 0;
-  while(i < length){
-    char *start = word_start(str);
-    char *end = word_terminator(str);
-    int sizediff = end - start;
-
+  while(i < length-1){
+    str = word_start(str);
+    int sizediff = word_terminator(str) - str;
     char_array[i] = copy_str(str,sizediff);
+    str = word_terminator(str);
     i++;
   }
-  char_array[i] = '\0';
+  char_array[i] = NULL;
   return char_array;
 }
 void print_tokens(char **tokens)
 {
   int i;
-  int j;
-  for(i = 0; *tokens[i] != '\0'; i++){
-    for(j = 0; tokens[i][j] != '\0'; j++){
-      printf("%c", tokens[i][j]);
-    }
-    printf(" ");
+  for(i = 0; tokens[i] != NULL; i++){
+    printf("%s\n", tokens[i]);
   }
 }
-
 void free_tokens(char **tokens)
 {
   int i = 0;
-  while(*tokens[i] != '\0'){
+  while(tokens[i] != NULL){
     free(tokens[i]);
     i++;
   }
-  free(tokens[i]);
   free(tokens);
-}
-void main(int argc, char *argv[]){
 }
