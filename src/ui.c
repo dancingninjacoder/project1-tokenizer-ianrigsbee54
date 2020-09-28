@@ -12,6 +12,7 @@ int main()
   printf("Welcome to tokenizer\n");
   printf("here are your commands\n");
   printf("q : quits program\n");
+  printf("h : prints history");
   printf("!x : brings up history at certain index x\n");
   
   while(*input != 'q' && input[1] != '\0'){/*makes sure the loop doesnt break because of q*/
@@ -32,6 +33,9 @@ int main()
       int index = (int)(input[1]); 
       char *histStr = get_history(hist, index);/*get specific history at index*/
       printf("item at index %i%s\n",index, histStr);
+    }
+    if(*input == 'h'){/*if user inputs h itll simply print the history*/
+      print_history(hist);
     }
     if(*input == 'q'){/*break out of loop to finish user input*/
       break;
