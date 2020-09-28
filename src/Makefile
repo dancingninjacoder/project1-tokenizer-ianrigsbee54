@@ -10,7 +10,7 @@ tokenizer: $(OBJS)
 
 #remove object files and autosaved files
 clean:
-	rm -f *.o *~ tokenizer
+	rm -f *.o *~ *-g *.gch tokenizer
 #runs the executable
 run: tokenizer
 	./tokenizer
