@@ -11,30 +11,28 @@ List *init_history()
 
 void add_history(List *list, char *str)
 {
+  char *temp1 = str;
   int count = 1;
-  int length;
   int i = 0;
-  while(str[i] != '\0'){
+  while(temp1[i] != '\0'){
     i++;
   }
-  length = i;
   
   Item *newItem = (Item*)malloc(sizeof(Item));
-  newItem -> str = copy_str(str, length);
-  newItem -> next = NULL;
-  
+  newItem->str = copy_str(str, i);
+  newItem->next = NULL;
   if(list->root == NULL){
     list->root = newItem;
     newItem->id = count;
-    return;
+  }else{
+    Item *temp = list->root;
+    while(temp->next != NULL){
+      count++;
+      temp = temp->next;
+    }
+    temp->next = newItem;
+    newItem->id = count;
   }
-  Item *temp = list->root;
-  while(temp->next != NULL){
-    count++;
-    temp = temp->next;
-  }
-  temp->next = newItem;
-  newItem->id = count;
 }
 
 char *get_history(List *list, int id)
@@ -48,6 +46,7 @@ char *get_history(List *list, int id)
     if(temp->id == id){
       return temp->str;
     }
+    temp = temp->next;
     i++;
   }
   printf("id out of bounds");
@@ -66,12 +65,11 @@ void print_history(List *list)
 void free_history(List *list)
 {
   Item *temp = list->root;
+  Item *tempnext;
   while(temp != NULL){
+    tempnext = temp->next;
     free(temp->str);
     free(temp);
     temp = temp->next;
   }
-  free(list);
 }
-
-
