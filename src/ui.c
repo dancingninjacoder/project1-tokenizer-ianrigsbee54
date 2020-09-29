@@ -15,7 +15,7 @@ int main()
   printf("h : prints history");
   printf("!x : brings up history at certain index x\n");
   
-  while(*input != 'q' && input[1] != '\0'){/*makes sure the loop doesnt break because of q*/
+  while(*input != 'q'){/*while the users input isnt q for quit, run the loop*/
     printf("$ ");
     fgets(input, MAX, stdin);
     if(*input != '!' && *input != 'q'){
