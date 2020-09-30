@@ -12,7 +12,7 @@ int main()
   printf("Welcome to tokenizer\n");
   printf("here are your commands\n");
   printf("q : quits program\n");
-  printf("h : prints history");
+  printf("h : prints history\n");
   printf("!x : brings up history at certain index x\n");
   
   while(*input != 'q'){/*while the users input isnt q for quit, run the loop*/
@@ -25,7 +25,7 @@ int main()
       
       print_tokens(token); /*print our tokens*/
       printf("freeing tokens\n");
-      free_tokens(token); /*free them*/
+      free_tokens(token);
       printf("adding to history\n");
       add_history(hist, input); /*then add our input to our history list*/
     }

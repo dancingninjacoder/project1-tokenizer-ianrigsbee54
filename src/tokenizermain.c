@@ -72,7 +72,7 @@ char **tokenize(char* str)
   char_array = (char**)malloc(sizeof(char*) * (length + 1));/*allocate memory for our vector*/
   int i = 0;
   
-  while(i < length - 1){/*start filling vector with pointers returned from copy_str*/
+  while(i < length){/*start filling vector with pointers returned from copy_str*/
     str = word_start(str);
     int sizediff = word_terminator(str) - str;/*find the difference in length*/
     char_array[i] = copy_str(str,sizediff);
