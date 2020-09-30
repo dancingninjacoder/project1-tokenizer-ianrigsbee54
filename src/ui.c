@@ -27,7 +27,7 @@ int main()
       printf("freeing tokens\n");
       free_tokens(token);
       printf("adding to history\n");
-      add_history(hist, input); /*then add our input to our history list*/
+      add_history(hist, copy_str(input, str_length(input))); /*then add our input to our history list*/
     }
     if(*input == '!'){/*check if user inputed ! for history lookup*/
       int index = (int)(input[1]); 
@@ -50,4 +50,14 @@ int main()
   printf("Thank you for using tokenizer!\n");
   return 0;
   
+}
+int str_length(char *input)
+{
+  int count = 0;
+  while(*input != '\0'){
+    count++;
+    input++;
+      
+  }
+  return count;
 }
