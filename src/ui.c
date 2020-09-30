@@ -4,6 +4,8 @@
 #include "history.h"
 
 #define MAX 50 /*max characters for input*/
+int str_length(char *str);
+
 int main()
 {
   char input[MAX]; /*input array for user input*/
